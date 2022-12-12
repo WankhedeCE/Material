@@ -1,0 +1,88 @@
+package Wankhede_CE;
+import java.util.Scanner;
+
+public class Java_Ass_3_Q1 
+{
+    Scanner input = new Scanner(System.in);
+    int n;
+    int[] arr = new int[10];
+
+    void getvalues()
+    {
+        System.out.println("Enter Array Size : ");
+        n = input.nextInt();
+        System.out.println("Enter Array elemnts : ");
+        for(int i = 0; i < n; i++)
+        {
+            arr[i] = input.nextInt();
+        }
+    }
+
+    void sortarry()
+    {
+        int i,j,a;
+        for (i = 0; i < n; ++i)
+        {
+            for (j = i + 1; j < n; ++j)
+            {
+                if (arr[i] > arr[j])
+                {
+                    a =  arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = a;
+                }
+            }
+        }
+    }
+
+    void printvalues()
+    {
+        for(int i = 0; i < n; i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+
+    void search(int search)
+    {
+        int first = 0;
+        int last = n;
+        int middle = (first + last) / 2;
+        
+        while(first <= last)
+        {
+            if(arr[middle] == search)
+            {
+                System.out.println("Element is at " + middle +  " index Position ");
+                break;
+            }
+            else if (arr[middle] <= search)
+            {
+                first = middle + 1;
+            }
+            else {
+                last = middle - 1;
+            }
+            middle = (first + last) / 2;
+        }
+        if(first > last)
+        {
+            System.out.println("Not found !"+ search + " is not present in the list.");
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in);
+        Java_Ass_3_Q1 obj = new Java_Ass_3_Q1();
+
+        obj.getvalues();
+        obj.sortarry();
+        obj.printvalues();
+
+        System.out.println("Enter value for searching : ");
+        int search = input.nextInt();
+
+        obj.search(search);
+    }
+}

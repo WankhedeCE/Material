@@ -1,0 +1,38 @@
+//Q.25
+#include<iostream>
+using namespace std;
+void IOS_operations()
+{
+	cout << "--------------------------\n";
+	cout << "Implementing ios::width\n\n";
+	char c = 'A';
+	cout.width(5);
+	cout << c;
+	cout << "\n--------------------------\n";
+	cout << "Implementing ios::precision\n\n";
+	cout.setf(ios::fixed, ios::floatfield);
+	cout.precision(2);
+	cout<<3.1422;
+	cout << "\n--------------------------\n";
+	cout << "Implementing ios::fill\n\n";
+	char ch = 'a';
+	cout.fill('*');
+	cout.width(10);
+	cout<<ch;
+	cout << "\n--------------------------\n";
+	cout << "Implementing ios::setf\n\n";
+	int val1=100,val2=200;
+	cout.setf(ios::showpos);
+	cout<<val1<<" "<<val2;
+	cout << "\n--------------------------\n";
+	cout << "Implementing ios::unsetf\n\n";
+	cout.setf(ios::showpos|ios::showpoint);
+	cout.unsetf(ios::showpos);
+	cout<<200.0;
+	cout << "\n--------------------------\n";
+}
+int main()
+{
+	IOS_operations();
+	return 0;
+}
