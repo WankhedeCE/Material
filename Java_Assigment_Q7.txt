@@ -1,0 +1,122 @@
+package Wankhede_CE;
+
+import java.util.*;
+
+public class Linklist_Q7_BY_Yug {
+    static Scanner sc = new Scanner(System.in);
+    node head;
+
+    class node {
+        int rno, marks;
+        String nm, email;
+        node next;
+
+        node(int rno, String nm, String email, int marks) {
+            this.rno = rno;
+            this.nm = nm;
+            this.email = email;
+            this.marks = marks;
+        }
+    }
+
+    public void insert(int rno, String nm, String email, int marks) {
+        node newnode = new node(rno, nm, email, marks);
+        // if linklist is empty then newnode assigned to head
+        if (head == null) {
+            head = newnode;
+            return;
+        }
+        // campare with head value according to aascending order
+        if ((newnode.nm).compareTo(head.nm) < 0) {
+            newnode.next = head;
+            head = newnode;
+            return;
+        }
+        node temp = head;
+        node prev = head;
+        while (temp != null && (newnode.nm).compareTo(temp.nm) > 0) {
+            prev = temp;
+            temp = temp.next;
+        }
+        prev.next = newnode;
+        newnode.next = temp;
+        // if linlist has some value than compare and add to respetive position
+    }
+
+    public void delete(int rno) {
+        if (head == null) {
+            System.out.println("\n Linklist is empty.....");
+            return;
+        }
+        node temp = head;
+        node prev = null;
+        while (temp != null && temp.rno != rno) {
+            prev = temp;
+            temp = temp.next;
+        }
+        if (temp == null) {
+            System.out.println("specified Number is not Exists in Linked List....");
+            return;
+        }
+        prev.next = temp.next;
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("Linklist is Empty.....");
+            return;
+        } else {
+            node temp = head;
+            System.out.println("RollNo\t\tName\t\tEmail\t\tMarks\n");
+            while (temp != null) {
+                System.out.println(temp.rno + "\t\t" + temp.nm + "\t\t" + temp.email + "\t\t" + temp.marks);
+                temp = temp.next;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Linklist_Q7_BY_Yug obj = new Linklist_Q7_BY_Yug();
+        int ch, rno, marks;
+        String nm, email;
+
+        do {
+            System.out.println("\n---------Choice-----\n1.insertion\n2.Delete(By Roll Number)\n3.display\n4.Exit");
+            System.out.println("Enter The Choice : ");
+            ch = sc.nextInt();
+
+            switch (ch) {
+                case 1:
+                    System.out.println("Enter Your Roll Number : ");
+                    rno = sc.nextInt();
+                    System.out.println("Enter Your Name : ");
+                    nm = sc.next();
+                    System.out.println("Enter Your Email : ");
+                    email = sc.next();
+                    System.out.println("Enter Your Marks : ");
+                    marks = sc.nextInt();
+                    obj.insert(rno, nm, email, marks);
+                    break;
+                case 2:
+                    if (obj.head == null) {
+                        System.out.println("Linklist is Empty....");
+                    } else {
+                        System.out.println("Enter the roll number of record which You want delete. ");
+                        rno = sc.nextInt();
+                        obj.delete(rno);
+                    }
+                    break;
+                case 3:
+                    obj.display();
+                    break;
+                case 4:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Enter the valid Choice....");
+            }
+
+        } while (ch != 4);
+    }
+}

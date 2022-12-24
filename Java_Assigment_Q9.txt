@@ -1,0 +1,100 @@
+package Wankhede_CE;
+import java.util.*;
+
+public class SinglyCir_Q9_By_Yug{
+
+    node start;
+    class node{
+        int pro_id;
+        String Pro_name;
+        float price;
+        node next;
+        node(int pro_id,String Pro_name,float price){
+            this.pro_id = pro_id;
+            this.Pro_name= Pro_name;
+            this.price = price;
+        }
+    }
+    node new_node(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Product Id : ");
+        int pro_id = sc.nextInt();
+        System.out.println("Enter Product Name : ");
+        String Pro_name = sc.next();
+        System.out.println("Enter Product Price : ");
+        float price = sc.nextFloat();
+        node new_node = new node(pro_id, Pro_name, price);
+        return new_node;
+    }
+    void ins_last(){
+        node new_node = new_node();
+        if(start == null){
+            start=new_node;
+            new_node.next=start;
+        }else{
+            node temp=start;
+            while(temp.next != start){
+                temp=temp.next;
+            }
+            temp.next=new_node;
+            new_node.next = start;
+        }
+    }
+    void search(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Prodect Name : ");
+        String Pro_name = sc.next();
+        int f=0;
+        if((start.Pro_name).equals(Pro_name)){
+            System.out.println(start.pro_id+""+start.Pro_name+""+start.price);
+        }else{
+            node temp = start;
+            while(temp != start){
+                if(((temp.next).Pro_name).equals(Pro_name)){
+                    f=1;
+                    break;
+                }
+                temp=temp.next;
+            }
+            if(f==1)
+                System.out.println(temp.pro_id+""+temp.Pro_name+""+temp.price);
+            else
+                System.out.println("Data Not Found");            
+        }
+    }
+    void display(){
+        node temp = start;
+        while(temp.next != start){
+            System.out.println(temp.pro_id+""+temp.Pro_name+""+temp.price);
+            temp=temp.next; 
+        }
+        System.out.println(temp.pro_id+""+temp.Pro_name+""+temp.price);
+    }
+    public static void main(String[] args) {
+        SinglyCir_Q9_By_Yug obj = new SinglyCir_Q9_By_Yug();
+        Scanner sc = new Scanner(System.in);
+        int ch;
+        do{
+            System.out.println("1.Insertion");
+            System.out.println("2.search");
+            System.out.println("3.Display");
+            System.out.println("4.Exit");
+            System.out.println("Enter Your Choice : ");
+            ch = sc.nextInt();
+
+            if (ch ==1) {
+                obj.ins_last();
+            }
+            else if(ch == 2){
+                obj.search();
+            }
+            else if(ch == 3){
+                obj.display();
+            }else{
+                System.out.println("Enter Valid Choice....");
+            }
+
+        }while(ch != 4);
+        
+    }    
+}

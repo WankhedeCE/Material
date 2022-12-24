@@ -1,0 +1,126 @@
+package Wankhede_CE;
+
+import java.util.*;
+
+public class duublyLink_Q8_Yug {
+    node start;
+
+    class node {
+        int id;
+        String title;
+        int price;
+        node next = null;
+        node prev = null;
+
+        node(int i, String t, int p) {
+            id = i;
+            title = t;
+            price = p;
+        }
+    }
+
+    void insert() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Book Id :- ");
+        int i = sc.nextInt();
+        System.out.println("Enter Book Name :- ");
+        String t = sc.next();
+        System.out.println("Enter Book Price :- ");
+        int p = sc.nextInt();
+
+        node new_node = new node(i, t, p);
+        if (start == null) {
+            start = new_node;
+        } else {
+            start.prev = new_node;
+            new_node.next = start;
+            start = new_node;
+        }
+    }
+
+    void delete() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Book Id :-");
+        int i = sc.nextInt();
+        if (start.id == i) {
+            start = start.next;
+            start.prev = null;
+        } else {
+            node temp = start;
+            while (temp.next != null) {
+                if ((temp.next).id == i) {
+                    break;
+                }
+                temp = temp.next;
+            }
+            temp.next = (temp.next).next;
+            (temp.next).prev = temp;
+        }
+    }
+
+    void search() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Book Name : ");
+        String i = sc.next();
+        int f = 0;
+        if ((start.title).equals(i)) {
+            System.out.println(start.id + "" + start.title + "" + start.price);
+        } else {
+            node temp = start;
+            while (temp.next != null) {
+                if ((temp.title).equals(i)) {
+                    f = 1;
+                    break;
+                }
+                temp = temp.next;
+            }
+            if (f == 1)
+                System.out.println(temp.id + "" + temp.title + "" + temp.price);
+            else
+                System.out.println("Data Not Found");
+        }
+    }
+
+    void display() {
+
+        node temp = start;
+        System.out.println("Book ID\t\tBook Name\tBook Price");
+        while (temp != null) {
+            System.out.println(temp.id + "\t\t" + temp.title + "\t\t" + temp.price);
+            temp = temp.next;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        duublyLink_Q8_Yug obj = new duublyLink_Q8_Yug();
+        Scanner sc = new Scanner(System.in);
+        int ch;
+
+        do {
+            System.out.println("1.Insertion");
+            System.out.println("2.Delete");
+            System.out.println("3.Search");
+            System.out.println("4.Display");
+            System.out.println("5.Exit");
+            System.out.println("Enter Your Choice : ");
+            ch = sc.nextInt();
+
+            if (ch == 1) {
+                obj.insert();
+            } else if (ch == 2) {
+                obj.delete();
+            } else if (ch == 3) {
+                obj.search();
+            } else if (ch == 4) {
+                obj.display();
+            } else {
+                System.out.println("Enter Valid Choice...");
+            }
+
+        } while (ch != 5);
+
+    }
+
+}

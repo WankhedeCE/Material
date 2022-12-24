@@ -1,0 +1,88 @@
+package Wankhede_CE;
+
+import java.util.*;
+
+public class Linklist_Q6_By_Yug {
+
+    static Scanner sc = new Scanner(System.in);
+    node head;
+
+    class node {
+        int rno, marks;
+        String nm;
+        node next;
+
+        node(int rno, String nm, int marks) {
+            this.rno = rno;
+            this.nm = nm;
+            this.marks = marks;
+        }
+    }
+
+    public void Insert(int rno, String nm, int marks) {
+        node newnode = new node(rno, nm, marks);
+        if (head == null) {
+            head = newnode;
+            return;
+        }
+        if (newnode.marks > head.marks) {
+            newnode.next = head;
+            head = newnode;
+            return;
+        }
+        node temp = head;
+        node prev = null;
+        while (temp != null && temp.marks > newnode.marks) {
+            prev = temp;
+            temp = temp.next;
+        }
+        prev.next = newnode;
+        newnode.next = temp;
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("List is Empty");
+            return;
+        }
+        node temp = head;
+        System.out.println("RollNo\tName\tmarks");
+        while (temp != null) {
+            System.out.println(temp.rno + "\t" + temp.nm + "\t" + temp.marks);
+            temp = temp.next;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Linklist_Q6_By_Yug obj = new Linklist_Q6_By_Yug();
+        int ch, rno, marks;
+        String nm;
+        do {
+            System.out.println("1.\3Insertion.\n2.\3Display.\n\3 3.Exit");
+            System.out.println("Enter Your Choice");
+            ch = sc.nextInt();
+            switch (ch) {
+                case 1:
+                    System.out.println("Enter Your Roll No : ");
+                    rno = sc.nextInt();
+                    System.out.println("Enter Your Name : ");
+                    nm = sc.next();
+                    System.out.println("Enter Your Marks : ");
+                    marks = sc.nextInt();
+                    obj.Insert(rno, nm, marks);
+                    break;
+                case 2:
+                    obj.display();
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Enter Valid Choice...");
+            }
+        } while (ch != 5);
+
+    }
+
+}
